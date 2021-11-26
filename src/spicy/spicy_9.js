@@ -15,7 +15,11 @@
  *                from calling the function
  */
 export const repeat = (fn, n, ...params) => {
-
+    var rtn=[];
+    for (let i=0;i<n;i++){
+        rtn.push(fn(params[i]));
+    }
+    return rtn;
 };
 
 
