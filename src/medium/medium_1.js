@@ -54,15 +54,15 @@ export function getMedian(array) {
  }
  */
 export function getStatistics(array) {
-    let rtn={};
-    rtn[length]=array.length;
-    rtn[sum]=getSum(array);
-    rtn[mean] = getSum(array)/array.length;
-    rtn[median] = getMedian(array);
-    rtn[min] = Math.min(...array);
-    rtn[max] = Math.max(...array);
-    rtn[variance] = variance(...array);
-    rtn[standard_deviation] = Math.sqrt(rtn[variance]);
+    let rtn= new Object();
+    rtn.length=array.length;
+    rtn.sum=getSum(array);
+    rtn.mean = getSum(array)/array.length;
+    rtn.median = getMedian(array);
+    rtn.min = Math.min(...array);
+    rtn.max = Math.max(...array);
+    rtn.variance = variance(...array);
+    rtn.standard_deviation = Math.sqrt(rtn[variance]);
     return rtn;
 }
 
