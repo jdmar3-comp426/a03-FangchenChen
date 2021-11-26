@@ -6,9 +6,9 @@
  * and https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math
  */
  export function maxAndMin(numbers) {
-    let mymin = Math.min(numbers);
-    let mymax = Math.max(numbers);
-    let rtn = {min:mymin, max:mymax};
+    var mymin = Math.min(...numbers);
+    var mymax = Math.max(...numbers);
+    var rtn = {min:mymin, max:mymax};
     return rtn;
 }
-console.log(maxAndMin())
+console.log(maxAndMin([3,2,2,3,4,1]))
