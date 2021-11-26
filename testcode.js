@@ -16,5 +16,5 @@
         return (array[array.length/2-1]+array[array.length/2])/2;
     }
 }
-let array = [1,2,3,4,5];
-console.log(getMedian(array));
+let array = [1,11,2,22,3,33];
+console.log(array.sort(function (a,b){return a-b;}));
