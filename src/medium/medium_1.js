@@ -61,8 +61,8 @@ export function getStatistics(array) {
     rtn.median = getMedian(array);
     rtn.min = Math.min(...array);
     rtn.max = Math.max(...array);
-    rtn.variance = variance(...array);
-    rtn.standard_deviation = Math.sqrt(rtn[variance]);
+    rtn.variance = variance(array,rtn.sum/rtn.length);
+    rtn.standard_deviation = Math.sqrt(rtn.variance);
     return rtn;
 }
 
