@@ -110,13 +110,13 @@ function getmoreStats(){
             }
         }
     }
-    for (let object in ms){
-        object["hybrid"]["city"]/=object["hybrid"]["count"];
-        object["hybrid"]["highway"]/=object["hybrid"]["count"];
-        object["nothybrid"]["city"]/=object["nothybrid"]["count"];
-        object["nothybrid"]["highway"]/=object["nothybrid"]["count"];
-        delete object.hybrid.count;
-        delete object.nothybrid.count;
+    for (let year in ms){
+        ms[year]["hybrid"]["city"]/=ms[year]["hybrid"]["count"];
+        ms[year]["hybrid"]["highway"]/=ms[year]["hybrid"]["count"];
+        ms[year]["nothybrid"]["city"]/=ms[year]["nothybrid"]["count"];
+        ms[year]["nothybrid"]["highway"]/=ms[year]["nothybrid"]["count"];
+        delete ms[year].hybrid.count;
+        delete ms[year].nothybrid.count;
     }
     return ms;
 }
