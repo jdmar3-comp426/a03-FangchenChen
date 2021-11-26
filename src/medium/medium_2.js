@@ -21,14 +21,17 @@ see under the methods section
  */
 
 function getavg(){
-    var s=0;
+    var citys=0;
+    var highs=0;
     var c=0;
     for (const object of mpg_data){
-        s=s+object.city_mpg+object.highway_mpg;
-        c+=2;
+        citys+=object.city_mpg;
+        highs+=object.highway_mpg;
+        c+=1;
     }
-    return s/c;
+    return {city:citys/c, highway:highs/c};
 }
+
 function getyears(){
     var years=[];
     for(const object of mpg_data){
