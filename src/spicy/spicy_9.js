@@ -17,7 +17,7 @@
 export const repeat = (fn, n, ...params) => {
     var rtn=[];
     for (let i=0;i<n;i++){
-        rtn.push(fn(params[i]));
+        rtn.push(fn(params));
     }
     return rtn;
 };
@@ -28,7 +28,7 @@ export const repeat = (fn, n, ...params) => {
  *   10 times.
  */
 export const repeatDemo = () => {
-
+    return repeat(console.log,10,"Hello, world!");
 };
 
 
