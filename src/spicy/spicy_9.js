@@ -93,7 +93,7 @@ export const tenTimesFifty = () => {
  */
 export const everyEven = (arr, test) => {
     var pass=true;
-    for (let i=1;i<arr.length;i+=2){
+    for (let i=0;i<arr.length;i+=2){
         if (test(arr[i])==false){
             pass=false;
             break;
@@ -124,7 +124,7 @@ export const everyEven = (arr, test) => {
  */
 export const someEven = (arr, test) => {
     var pass=false;
-    for (let i=1;i<arr.length;i+=2){
+    for (let i=0;i<arr.length;i+=2){
         if (test(arr[i])==true){
             pass=true;
             break;
