@@ -1,5 +1,5 @@
 import mpg_data from "./data/mpg_data.js";
-import {getStatistics} from "./medium_1.js";
+import { getStatistics, getSum } from "./medium_1.js";
 
 /*
 This section can be done by using the array prototype functions.
@@ -19,13 +19,107 @@ see under the methods section
  *
  * @param {allCarStats.ratioHybrids} ratio of cars that are hybrids
  */
+
+function getavg() {
+    var citys = 0;
+    var highs = 0;
+    var c = 0;
+    for (const object of mpg_data) {
+        citys += object.city_mpg;
+        highs += object.highway_mpg;
+        c += 1;
+    }
+    return { city: citys / c, highway: highs / c };
+}
+
+function getyears() {
+    var years = [];
+    for (const object of mpg_data) {
+        years.push(object.year);
+    }
+    return years;
+}
+function getratio() {
+    var hcount = 0;
+    var tcount = 0;
+    for (const object of mpg_data) {
+        if (object.hybrid == true) {
+            hcount += 1;
+            tcount += 1;
+        }
+        else {
+            tcount += 1;
+        }
+    }
+    return hcount / tcount;
+}
 export const allCarStats = {
-    avgMpg: undefined,
-    allYearStats: undefined,
-    ratioHybrids: undefined,
+    avgMpg: getavg(),
+    allYearStats: getStatistics(getyears()),
+    ratioHybrids: getratio(),
 };
 
+function getmakesHcount() {
+    var makesH = [];
+    for (const object of mpg_data) {
+        if (object.hybrid) {
+            let exist = false;
+            for (let entry of makesH) {
+                if (entry["make"] == object.make) {
+                    exist = true;
+                    entry["hybrids"].push(object.id);
+                    break;
+                }
+            }
+            if (exist == false) {
+                makesH.push({ "make": object.make, "hybrids": [object.id] });
+            }
+        }
+    }
+    makesH.sort((a,b)=>a["hybrids"].length-b["hybrids"].length);
+    return makesH;
+}
 
+function getmoreStats(){
+    var ms={};
+    for (const object of mpg_data) {
+        if(ms[object.year]){
+            if (object.hybrid){
+                ms[object.year]["hybrid"]["city"]+=object.city_mpg;
+                ms[object.year]["hybrid"]["highway"]+=object.highway_mpg;
+                ms[object.year]["hybrid"]["count"]+=1;
+            }
+            else{
+                ms[object.year]["nothybrid"]["city"]+=object.city_mpg;
+                ms[object.year]["nothybrid"]["highway"]+=object.highway_mpg;
+                ms[object.year]["nothybrid"]["count"]+=1;
+            }
+        }
+        else{
+            ms[object.year] = {
+                "hybrid":{
+                    "city":0,
+                    "highway":0,
+                    "count":0
+                },
+                "nothybrid":{
+                    "city":0,
+                    "highway":0,
+                    "count":0
+                }
+            }
+        }
+    }
+    for (let year in ms){
+        ms[year]["hybrid"]["city"]/=ms[year]["hybrid"]["count"];
+        ms[year]["hybrid"]["highway"]/=ms[year]["hybrid"]["count"];
+        ms[year]["nothybrid"]["city"]/=ms[year]["nothybrid"]["count"];
+        ms[year]["nothybrid"]["highway"]/=ms[year]["nothybrid"]["count"];
+        delete ms[year].hybrid.count;
+        delete ms[year].nothybrid.count;
+    }
+    return ms;
+}
 /**
  * HINT: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
  *
@@ -84,6 +178,6 @@ export const allCarStats = {
  * }
  */
 export const moreStats = {
-    makerHybrids: undefined,
-    avgMpgByYearAndHybrid: undefined
+    makerHybrids: getmakesHcount(),
+    avgMpgByYearAndHybrid: getmoreStats()
 };
